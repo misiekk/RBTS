@@ -12,6 +12,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -24,7 +28,8 @@ import javax.imageio.*;
 
 public class MainWindow extends JFrame implements Runnable, Observer {
 	JLabel textInfo;
-	public ArrayList<ImageIcon> images;
+	//public ArrayList<ImageIcon> images;
+	public Map<Integer, ImageIcon> imagesMap;
 	GraphicsDevice gd = null;
 	private boolean readyToLoad = false;
 	private int actualSlide = 0;
@@ -51,7 +56,8 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 		textInfo.setText("EasyPres");
 		this.add(textInfo);
 		
-		images = new ArrayList<ImageIcon>();
+		//images = new ArrayList<ImageIcon>();
+		imagesMap = new HashMap<Integer, ImageIcon>();
 		
 		Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
 		this.screenH = screen.height;
@@ -90,7 +96,13 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 		File dir = new File(RemoteBTServer.PATH_TO_SLIDES);
 		if(dir.exists() && dir.isDirectory()){
 			File files[] = dir.listFiles();
+						
 			for(File f : files){
+				//System.out.println(f.getName());
+				String temp = f.getName();
+				temp = temp.substring(5);	// delete 'slide' from name
+				temp = temp.substring(0, temp.length()-5);	// delete extension from name
+				
 				Image image = ImageIO.read(f);
 				BufferedImage bi = new BufferedImage(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight(),
 						BufferedImage.TYPE_INT_RGB); 
@@ -98,21 +110,22 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 				g.drawImage(image, 0, 0, gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight(), null);
 				
 				ImageIcon icon = new ImageIcon(bi);
-				images.add(icon);
+				//images.add(icon);
+				imagesMap.put(Integer.parseInt(temp), icon);
 			}
 		}
 		else{
 			throw new IOException("Path doesn't exists!");
 		}
-		textInfo.setText("Loaded " + images.size() + " slides!");
-		this.slidesCount = images.size();
+		textInfo.setText("Loaded " + imagesMap.size() + " slides!");
+		this.slidesCount = imagesMap.size();
 		System.out.println("Slides count is " + slidesCount);
 
 		showSlides(actualSlide); // first slide
 	}
 	
 	void showSlides(int param){
-		ImageIcon element = images.get(param);
+		ImageIcon element = imagesMap.get(param);
 		textInfo.setText(null);
 		textInfo.setIcon(element);
 		textInfo.setBounds(0, 0, gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight());
