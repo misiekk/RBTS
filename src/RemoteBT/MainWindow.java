@@ -163,6 +163,18 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 			}
 			System.out.println("Actual = " + actualSlide);
 		}		
+		else if((Integer)arg == RemoteBTServer.LAST_SLIDE_NOTIFY){
+			System.out.println("LAST!");
+			actualSlide = slidesCount-1;
+			showSlides(actualSlide);
+			System.out.println("Actual = " + actualSlide);
+		}		
+		else if((Integer)arg == RemoteBTServer.FIRST_SLIDE_NOTIFY){
+			System.out.println("FIRST!");
+			actualSlide = 0;
+			showSlides(actualSlide);
+			System.out.println("Actual = " + actualSlide);
+		}		
 	}	
 }
 	

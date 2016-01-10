@@ -44,9 +44,13 @@ public class RemoteThread extends Observable implements Runnable, Observer {
 		
 		while(true){
 			try{
+				System.out.println("AAA");
 				con = not.acceptAndOpen();
+				System.out.println("BBB");
 				Thread conThr = new Thread(new ConnectionThread(con, this, filesSent));
+				System.out.println("CCC");
 				conThr.start();
+				System.out.println("DDD");
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -73,6 +77,14 @@ public class RemoteThread extends Observable implements Runnable, Observer {
 		else if((Integer)arg == RemoteBTServer.LOADING_FILES_NOTIFY){
 			this.setChanged();
 			this.notifyObservers(RemoteBTServer.LOADING_FILES_NOTIFY);
+		}	
+		else if((Integer)arg == RemoteBTServer.FIRST_SLIDE_NOTIFY){
+			this.setChanged();
+			this.notifyObservers(RemoteBTServer.FIRST_SLIDE_NOTIFY);
+		}	
+		else if((Integer)arg == RemoteBTServer.LAST_SLIDE_NOTIFY){
+			this.setChanged();
+			this.notifyObservers(RemoteBTServer.LAST_SLIDE_NOTIFY);
 		}	
 	}
 }

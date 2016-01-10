@@ -8,6 +8,8 @@ public class RemoteBTServer{
 	public static final int ALL_FILES_RECEIVED_NOTIFY = 2;
 	public static final int NEXT_SLIDE_NOTIFY = 3;
 	public static final int PREV_SLIDE_NOTIFY = 4;
+	public static final int FIRST_SLIDE_NOTIFY = 5;
+	public static final int LAST_SLIDE_NOTIFY = 6;
 	public static final int LOADING_FILES_NOTIFY = 11;
 	public static final String EXIT = "#X";
 	public static final String PREFIX_SLIDE = "#S";

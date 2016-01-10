@@ -196,6 +196,14 @@ public class ConnectionThread extends Observable implements Runnable {
 		        			this.setChanged();
 		        			this.notifyObservers(RemoteBTServer.PREV_SLIDE_NOTIFY);
 		        		}
+		        		else if(command == RemoteBTServer.FIRST_SLIDE_NOTIFY){
+		        			this.setChanged();
+		        			this.notifyObservers(RemoteBTServer.FIRST_SLIDE_NOTIFY);
+		        		}
+		        		else if(command == RemoteBTServer.LAST_SLIDE_NOTIFY){
+		        			this.setChanged();
+		        			this.notifyObservers(RemoteBTServer.LAST_SLIDE_NOTIFY);
+		        		}
 		        		else{
 		        			throw new IOException("Unrecognised command!");
 		        		}
