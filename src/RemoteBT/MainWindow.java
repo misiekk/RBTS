@@ -69,6 +69,16 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 	public void run(){
 		
 	}
+	
+	
+	public void clean(){
+		File dir = new File(RemoteBTServer.PATH_TO_SLIDES);
+		for(File f : dir.listFiles()){
+			f.delete();
+		}
+	}
+
+
 	public void loadImage(String path){
 		String[] tab = {"a.jpg", "b.jpg", "c.jpg"};
 		try{
@@ -101,7 +111,7 @@ public class MainWindow extends JFrame implements Runnable, Observer {
 				//System.out.println(f.getName());
 				String temp = f.getName();
 				temp = temp.substring(5);	// delete 'slide' from name
-				temp = temp.substring(0, temp.length()-5);	// delete extension from name
+				temp = temp.substring(0, temp.length()-4);	// delete extension from name
 				
 				Image image = ImageIO.read(f);
 				BufferedImage bi = new BufferedImage(gd.getDisplayMode().getWidth(), gd.getDisplayMode().getHeight(),

@@ -120,7 +120,7 @@ public class ConnectionThread extends Observable implements Runnable {
 	        for(int i=0; i<slidesNumber; ++i){
 	        	FileOutputStream fos = null;
 	        	data = null;
-				String fileName = RemoteBTServer.PATH_TO_SLIDES + "slide" + Integer.toString(i) + ".jpeg";
+				String fileName = RemoteBTServer.PATH_TO_SLIDES + "slide" + Integer.toString(i) + ".png";
 				File f = new File(fileName);
 				data = new byte[65536];
 				fos = new FileOutputStream(f);

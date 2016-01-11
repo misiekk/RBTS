@@ -21,15 +21,10 @@ public class RemoteBTServer{
 	
 	
 	
-	public static void main(String args[]){
-		//Thread t = new Thread(new RemoteThread());
-		//Thread t = new Thread(new WifiThread());
-		//t.start();		
+	public static void main(String args[]){	
 		MainWindow mw = new MainWindow();
+		mw.clean();
 		mw.setVisible(true);
-		/*
-		String path = "/home/piotrek/eclipse/workspace/RemoteBTServer/res/";
-		mw.loadImage(path);*/
 
 	}
 }
